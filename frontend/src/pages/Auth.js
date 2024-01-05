@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-
 import './Auth.css';
 import AuthContext from '../context/auth-context';
-
+/*@purpose; class for login
+@author:spoorthi
+@parameters: react
+@return type
+*/
 class AuthPage extends Component {
   state = {
-    isLogin: true
+    isLogin: true,
+    loginFailed: false
   };
 
   static contextType = AuthContext;
@@ -15,10 +19,14 @@ class AuthPage extends Component {
     this.emailEl = React.createRef();
     this.passwordEl = React.createRef();
   }
-
+/*@purpose; function for login
+@author:spoorthi
+@parameters: react
+@return type : string
+*/
   switchModeHandler = () => {
     this.setState(prevState => {
-      return { isLogin: !prevState.isLogin };
+      return { isLogin: !prevState.isLogin, loginFailed: false };
     });
   };
 
@@ -30,7 +38,11 @@ class AuthPage extends Component {
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;
     }
-
+/*@purpose; query for login and creating the user
+@author:spoorthi
+@parameters: react
+@return type
+*/
     let requestBody = {
       query: `
         query Login($email: String!, $password: String!) {
@@ -87,16 +99,25 @@ class AuthPage extends Component {
             resData.data.login.email,
             resData.data.login.tokenExpiration
           );
+        } else {
+          throw new Error('Bad Credentials');
         }
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.message);
+        alert('Bad Credentials');
+        this.setState({ loginFailed: true });
       });
   };
-
+/*@purpose; login using form controls
+@author:spoorthi
+@parameters: react
+@return type
+*/
   render() {
     return (
       <form className="auth-form" onSubmit={this.submitHandler}>
+          <h2> LOGIN HERE!</h2>
         <div className="form-control">
           <label htmlFor="email">E-Mail</label>
           <input type="email" id="email" ref={this.emailEl} />
@@ -105,6 +126,9 @@ class AuthPage extends Component {
           <label htmlFor="password">Password</label>
           <input type="password" id="password" ref={this.passwordEl} />
         </div>
+        {this.state.loginFailed && (
+          <p style={{ color: 'red' }}>Bad Credentials. Please try again.</p>
+        )}
         <div className="form-actions">
           <button type="submit">Submit</button>
           <button type="button" onClick={this.switchModeHandler}>

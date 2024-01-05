@@ -1,15 +1,13 @@
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  /* display: flex; */
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f2f2f2;
-  /* background-repeat: repeat-y; */
-  /* background-size: auto; */
-  background-image: url('./images/bg7.jpeg');
+  font-family: sans-serif;
+  background: url(./images/bg.jpg) no-repeat center center fixed;  
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+   overflow: hidden;
 }
 
 .form-control label,
