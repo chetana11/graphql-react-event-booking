@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import jwt from 'jsonwebtoken';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import AuthPage from './pages/Auth';
@@ -21,22 +22,30 @@ class App extends Component {
   };
 
   logout = () => {
-    const storedToken = localStorage.setItem('token',"");
-    const email = localStorage.setItem('email',"");
+    localStorage.setItem('token',"");
     this.setState({ token: null, userId: null });
   };
-
-  render() {
+  componentDidMount() {
     const storedToken = localStorage.getItem('token');
-    const email = localStorage.getItem('email');
+
+    if (storedToken) {
+      // Decode token and set user data if the token exists
+      const userData = jwt.decode(storedToken);
+       // Access user data from the decoded payload
+      if (userData) {
+        this.setState({ token: storedToken, userId: userData.userId , email: userData.email});
+      } 
+    }
+  }
+  render() {
     return (
       <BrowserRouter>
         <React.Fragment>
           <AuthContext.Provider
             value={{
-              token: storedToken,
+              token: this.state.token,
               userId: this.state.userId,
-              email:email,
+              email:this.state.email,
               login: this.login,
               logout: this.logout
             }}
