@@ -15,24 +15,28 @@ class App extends Component {
     userId: null,
     email:null
   };
-
+  
   login = (token, userId, email,tokenExpiration) => {
     this.setState({ token: token, userId: userId , email: email});
   };
 
   logout = () => {
+    const storedToken = localStorage.setItem('token',"");
+    const email = localStorage.setItem('email',"");
     this.setState({ token: null, userId: null });
   };
 
   render() {
+    const storedToken = localStorage.getItem('token');
+    const email = localStorage.getItem('email');
     return (
       <BrowserRouter>
         <React.Fragment>
           <AuthContext.Provider
             value={{
-              token: this.state.token,
+              token: storedToken,
               userId: this.state.userId,
-              email:this.state.email,
+              email:email,
               login: this.login,
               logout: this.logout
             }}

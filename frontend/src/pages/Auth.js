@@ -80,6 +80,8 @@ class AuthPage extends Component {
       })
       .then(resData => {
         if (resData.data.login.token) {
+          localStorage.setItem('token',resData.data.login.token);
+          localStorage.setItem('email',resData.data.login.email);
           this.context.login(
             resData.data.login.token,
             resData.data.login.userId,
