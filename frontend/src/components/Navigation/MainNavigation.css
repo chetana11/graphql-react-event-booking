@@ -33,7 +33,10 @@
 .main-navigation__items li {
   margin: 0 1rem;
 }
-
+.main-navigation__items li h3 {
+  margin: 0 1rem;
+  color: white;
+}
 .main-navigation__items a,
 .main-navigation__items button {
   text-decoration: none;
@@ -56,3 +59,16 @@
   color: #5101d1;
   border-radius: 5px;
 }
+
+.dashboard-header h3 {
+  text-decoration: none;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  font: inherit;
+  background: transparent;
+  cursor: pointer;
+  vertical-align: middle;
+  margin: 0;
+}
+

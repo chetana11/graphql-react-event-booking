@@ -1,10 +1,15 @@
 body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  /* background-color: aquamarine; */
-  /* background-image: url('./images/bg-event.jpeg'); */
-  
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f2f2f2;
+  /* background-repeat: repeat-y; */
+  /* background-size: auto; */
+  background-image: url('./images/bg7.jpeg');
 }
 
 .form-control label,
@@ -41,4 +46,36 @@ body {
 .btn:active {
   background: #6219d6;
   border-color: #6219d6;
+}
+label {
+  display: block;
+  margin: 10px 0 5px;
+  color: #666;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  /* width: 100%; */
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+h2 {
+  text-align: center;
+  color: #333;
 }
